@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import '../App.css'
 import WeatherContext from '../contexts/WeatherContext'
 
 function Weather() {
@@ -9,31 +10,28 @@ function Weather() {
     const handleCity = (e) => {
       setCity(e.target.value)
     }
-    
-    console.log(weather)
 
     const handleSubmit = (e) => {
       e.preventDefault()
+      console.log(weather)
     }
     
-
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
           <input 
           type="text" 
           onChange={handleCity}/>
       </form>
-      <ul>
-        {
-          city.map(cit => (
-            <div>
-              {cit.name}
-            </div>
-
-          ))
-        }
-      </ul>
+      <div>
+        <div className="city">
+          <h2>{weather?.name} / {weather?.sys?.country}</h2>
+        </div>
+        <div className="temp-field">
+          <p>{Math.round(weather?.main?.temp)}°C</p>
+          <h5>{Math.round(weather?.main?.temp_min)}°C / {Math.round(weather?.main?.temp_max)}°C</h5>
+        </div>
+      </div>
     </div>
   )
 }
